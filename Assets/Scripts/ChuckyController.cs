@@ -78,19 +78,23 @@ public class ChuckyController : MonoBehaviour
         return false;
     }
 
-    public void ActivateRedCircle(){
+    public void ActivateRedCircle()
+    {
         redCircle.SetActive(true);
     }
 
-    public void DeactivateRedCircle(){
+    public void DeactivateRedCircle()
+    {
         redCircle.SetActive(false);
     }
 
-    public void ActivateGreenCircle(){
+    public void ActivateGreenCircle()
+    {
         greenCircle.SetActive(true);
     }
 
-    public void DeactivateGreenCircle(){
+    public void DeactivateGreenCircle()
+    {
         greenCircle.SetActive(false);
     }
 
@@ -140,8 +144,9 @@ public class ChuckyController : MonoBehaviour
         if (chucky.happy)
         {
             emotionController.SetHappy();
-            chucky.CheckContagion();
             greenCircle.SetActive(true);
         }
+
+        chucky.CheckContagion();
     }
 }
