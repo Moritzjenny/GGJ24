@@ -10,10 +10,6 @@ public class Score : MonoBehaviour
   void Awake()
   {
     instance = this;
-  }
-
-  void Start()
-  {
     text = GetComponent<Text>();
   }
 

@@ -17,7 +17,6 @@ public class EmotionController : MonoBehaviour
             Debug.LogError("Animator component not found on the same GameObject.");
         }
 
-        SetHappy();
     }
      
 

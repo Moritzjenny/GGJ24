@@ -6,6 +6,7 @@ public class ChuckyController : MonoBehaviour
     private Animator chuckyAnimator;
     private Rigidbody chuckyRigidbody; // Reference to the attached Rigidbody
     private EmotionController emotionController;
+    private Chucky chucky;
 
     void Awake()
     {
@@ -15,6 +16,9 @@ public class ChuckyController : MonoBehaviour
 
         // Find the attached Rigidbody component
         chuckyRigidbody = GetComponent<Rigidbody>();
+
+        // Get Chucky
+        chucky = GetComponent<Chucky>();
 
         if (chuckyRigidbody == null)
         {
@@ -54,7 +58,7 @@ public class ChuckyController : MonoBehaviour
         }
 
         // Velocity has fallen below 0.1 and is not colliding with 'Obstacle', start the GetUpCoroutine
-        StartCoroutine(GetUpCoroutine(1f));
+        StartCoroutine(GetUpCoroutine(0.8f));
     }
 
 
@@ -114,6 +118,8 @@ public class ChuckyController : MonoBehaviour
         chuckyAnimator.enabled = true;
 
         // Set happy after recovering
-        emotionController.SetHappy();
+        if (chucky.happy){
+            emotionController.SetHappy();
+        }
     }
 }
