@@ -13,8 +13,8 @@ public class Score : MonoBehaviour
     text = GetComponent<Text>();
   }
 
-  public void SetScore(int happyChuckies, int totalChuckies)
+  public void UpdateScore()
   {
-    text.text = $"{happyChuckies}/{totalChuckies} happy";
+    text.text = $"{GameManager.instance.happyChuckies}/{GameManager.instance.chuckies.Length} happy";
   }
 }

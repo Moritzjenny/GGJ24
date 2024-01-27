@@ -9,16 +9,8 @@ public class EmotionController : MonoBehaviour
 
     void Awake()
     {
-        // Find the Animator component on the same GameObject
         animator = GetComponent<Animator>();
-
-        if (animator == null)
-        {
-            Debug.LogError("Animator component not found on the same GameObject.");
-        }
-
     }
-     
 
     public void SetHappy()
     {

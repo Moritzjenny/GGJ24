@@ -5,10 +5,10 @@ public class GameManager : MonoBehaviour
 {
   public static GameManager instance;
 
-  public int HappyChuckies { get; private set; }
-  public int TotalChuckies { get; private set; }
+  public int contagionDistance = 10;
 
-  private Chucky[] chuckies;
+  [HideInInspector] public Chucky[] chuckies;
+  [HideInInspector] public int happyChuckies;
 
   void Awake()
   {
@@ -17,15 +17,18 @@ public class GameManager : MonoBehaviour
 
   void Start()
   {
-    chuckies = FindObjectsOfType<Chucky>();
-    TotalChuckies = chuckies.Length;
-    HappyChuckies = 0;
-    Score.instance.SetScore(HappyChuckies, TotalChuckies);
+    InitChuckies();
   }
 
-  public void IncreaseHappyChuckies()
+  public void InitChuckies()
   {
-    HappyChuckies += 1;
-    Score.instance.SetScore(HappyChuckies, TotalChuckies);
+    chuckies = FindObjectsOfType<Chucky>();
+    Score.instance.UpdateScore();
+  }
+
+  public void IncrementHappyChuckies()
+  {
+    happyChuckies += 1;
+    Score.instance.UpdateScore();
   }
 }

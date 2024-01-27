@@ -25,7 +25,7 @@ public class Chucky : MonoBehaviour
     {
         if (happy)
         {
-            GameManager.instance.IncreaseHappyChuckies();
+            GameManager.instance.IncrementHappyChuckies();
             emotionController.SetHappy();
         }
         else
@@ -93,5 +93,21 @@ public class Chucky : MonoBehaviour
     {
         happy = true;
         emotionController.SetHappy();
+        //CheckContagion();
     }
+
+    // public void CheckContagion()
+    // {
+    //     foreach (var otherChucky in GameManager.instance.chuckies)
+    //     {
+    //         if (otherChucky != this)
+    //         {
+    //             Vector3 direction = this.transform.position - otherChucky.transform.position;
+    //             if (Physics.Raycast(this.transform.position, direction, out RaycastHit hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Obstacle")) && hit.distance <= GameManager.instance.contagionDistance && (chucky.happy || otherChucky.happy))
+    //             {
+
+    //             }
+    //         }
+    //     }
+    // }
 }

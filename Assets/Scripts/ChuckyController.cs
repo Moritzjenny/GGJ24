@@ -36,11 +36,10 @@ public class ChuckyController : MonoBehaviour
 
         // Set sad while flying
         emotionController.SetSad();
-
-        
     }
 
-    public void CheckForRecovery(){
+    public void CheckForRecovery()
+    {
         // Start Coroutine to continuously check velocity and collision until it's safe to recover
         StartCoroutine(CheckVelocityAndCollisionCoroutine());
     }
@@ -48,7 +47,7 @@ public class ChuckyController : MonoBehaviour
     private IEnumerator CheckVelocityAndCollisionCoroutine()
     {
         Collider chuckyCollider = GetComponent<Collider>();
-        
+
         yield return new WaitForFixedUpdate();
 
         // Wait while the velocity is greater than or equal to 0.1f or is still colliding with "Obstacle"
@@ -118,8 +117,10 @@ public class ChuckyController : MonoBehaviour
         chuckyAnimator.enabled = true;
 
         // Set happy after recovering
-        if (chucky.happy){
+        if (chucky.happy)
+        {
             emotionController.SetHappy();
+            // chucky.CheckContagion();
         }
     }
 }
