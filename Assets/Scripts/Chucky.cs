@@ -1,19 +1,17 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Chucky : MonoBehaviour
 {
-    private Rigidbody[] rigidbodies;
-    private Rigidbody mainRigidBody;
-    public ChuckyController chuckyController;
+    public static Chucky activeInstance;
+
+    private new Rigidbody rigidbody;
+    private ChuckyController chuckyController;
 
     private void Awake()
     {
-        rigidbodies = GetComponentsInChildren<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
         chuckyController = GetComponent<ChuckyController>();
-        // Find the attached Rigidbody component
-        mainRigidBody = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -27,22 +25,29 @@ public class Chucky : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject.transform.IsChildOf(transform))
             {
-                print("click");
                 if (leftButtonClick)
                 {
-                    CameraController.instance.SetPivot(transform);
-                }
-                else if (rightButtonClick)
-                {
-                    CameraController.instance.ResetPivot();
-
-                    // Inform ChuckyController about kick, animation and gamelogic affected by the impulse is going to be handled there
-                    chuckyController.KickChucky();
-                    // Add force to main body to which pelvis is fixely joint schimauscha
-                    mainRigidBody.AddForce(10000 * CameraController.instance.transform.forward);
-
+                    if (activeInstance == this)
+                    {
+                        activeInstance = null;
+                        CameraController.instance.ResetPivot();
+                        ForceController.instance.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        activeInstance = this;
+                        CameraController.instance.SetPivot(transform);
+                        ForceController.instance.gameObject.SetActive(true);
+                    }
                 }
             }
         }
+    }
+
+    public void Kick(float force)
+    {
+        // Inform ChuckyController about kick, animation and gamelogic affected by the impulse is going to be handled there
+        chuckyController.KickChucky();
+        rigidbody.AddForce(force * CameraController.instance.transform.forward);
     }
 }

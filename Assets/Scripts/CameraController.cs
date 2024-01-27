@@ -1,5 +1,5 @@
 using System;
-using UnityEditor;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -97,7 +97,7 @@ public class CameraController : MonoBehaviour
         float angleDeltaZ = mouseDelta.x * rotationSpeed * Time.deltaTime;
         transform.RotateAround(pivot.position, Vector3.up, angleDeltaZ);
 
-        float angleDeltaX = -mouseDelta.y * rotationSpeed * Time.deltaTime;
+        float angleDeltaX = mouseDelta.y * rotationSpeed * Time.deltaTime;
         float angleX = Vector3.Angle(-Vector3.up, transform.forward);
         float newAngleX = angleX + angleDeltaX;
         float clampedAngleX = Mathf.Clamp(newAngleX, minAngle, pivot == initialPivot ? maxAngle : maxAngleChucky);
@@ -151,5 +151,16 @@ public class CameraController : MonoBehaviour
         toPosition = initialPosition;
         toRotation = initialRotation;
         t = 0;
+    }
+
+    public void ResetPivotAfterSeconds(float seconds)
+    {
+        StartCoroutine(InvokeAfterSeconds(seconds, ResetPivot));
+    }
+
+    IEnumerator InvokeAfterSeconds(float seconds, Action callback)
+    {
+        yield return new WaitForSeconds(seconds);
+        callback.Invoke();
     }
 }
