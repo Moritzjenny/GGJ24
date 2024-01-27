@@ -54,7 +54,7 @@ public class ChuckyController : MonoBehaviour
         }
 
         // Velocity has fallen below 0.1 and is not colliding with 'Obstacle', start the GetUpCoroutine
-        StartCoroutine(GetUpCoroutine(0.3f));
+        StartCoroutine(GetUpCoroutine(1f));
     }
 
 
