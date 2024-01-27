@@ -11,6 +11,7 @@ public class ForceController : MonoBehaviour
     public float fillDuration = 1.5f;
     public int maxForce = 10000;
 
+    private AudioSource audioSource;
     private Image gradient;
 
     void Awake()
@@ -20,6 +21,7 @@ public class ForceController : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         gradient = GetComponentsInChildren<Image>()[1];
         gradient.fillAmount = 0;
         gameObject.SetActive(false);
@@ -27,6 +29,11 @@ public class ForceController : MonoBehaviour
 
     void Update()
     {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            audioSource.Play();
+        }
+
         if (Keyboard.current.spaceKey.isPressed)
         {
             gradient.fillAmount = Math.Clamp(gradient.fillAmount + Time.deltaTime / fillDuration, 0, 1);
@@ -37,6 +44,7 @@ public class ForceController : MonoBehaviour
             Chucky.activeInstance.Kick(gradient.fillAmount * maxForce);
             gradient.fillAmount = 0;
             gameObject.SetActive(false);
+            audioSource.Stop();
 
         }
     }
