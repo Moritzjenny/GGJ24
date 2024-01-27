@@ -1,9 +1,13 @@
+using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
   public static GameManager instance;
 
+  public int level;
   public int contagionDistance = 0;
 
   [HideInInspector] public Chucky[] chuckies;
@@ -30,11 +34,38 @@ public class GameManager : MonoBehaviour
   {
     happyChuckies += 1;
     Score.instance.UpdateScore();
+
+    if (happyChuckies == chuckies.Length)
+    {
+      StartCoroutine(InvokeAfterSeconds(1, FinishLevel));
+    }
   }
 
-    public void IncrementBumps()
+  public void IncrementBumps()
   {
     bumps += 1;
     Bumps.instance.UpdateBumps();
+  }
+
+  private void FinishLevel()
+  {
+    var key = $"level{level}";
+    var currentHighscore = PlayerPrefs.GetInt(key);
+
+    if (!PlayerPrefs.HasKey(key) || bumps < currentHighscore)
+    {
+      PlayerPrefs.SetInt(key, bumps);
+      HighscoreController.instance.Show(currentHighscore);
+    }
+    else
+    {
+      SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
+    }
+  }
+
+  IEnumerator InvokeAfterSeconds(float seconds, Action callback)
+  {
+    yield return new WaitForSeconds(seconds);
+    callback.Invoke();
   }
 }

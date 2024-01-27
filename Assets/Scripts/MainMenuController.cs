@@ -1,0 +1,16 @@
+using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class MainMenuController : MonoBehaviour
+{
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+    }
+
+    public void QuitApplication()
+    {
+        Application.Quit();
+    }
+}
