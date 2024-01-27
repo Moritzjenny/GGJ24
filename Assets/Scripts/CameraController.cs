@@ -12,19 +12,21 @@ public class CameraController : MonoBehaviour
     public float resetDelay = 1f;
 
     [Header("Rotation")]
-    public int rotationSpeed = 360;
+    public int rotationSpeed = 270;
     public int minAngle = 10;
     public int maxAngle = 80;
-    public int maxAngleChucky = 170;
 
     [Header("Zoom")]
-    public int zoomSpeed = 10;
+    public int zoomSpeed = 8;
     public int minDistance = 10;
     public int maxDistance = 100;
 
     [Header("Chucky")]
-    public int chuckyDistance = 10;
-    public int chuckyHeightOffset = 2;
+    public int chuckyMaxAngle = 170;
+    public int chuckyInitialDistance = 10;
+    public int chuckyInitialOffsetY = 2;
+    public int chuckyMinDistance = 1;
+    public int chuckyMaxDistance = 20;
 
     private Transform initialPivot;
     private Vector3 initialPosition;
@@ -101,7 +103,7 @@ public class CameraController : MonoBehaviour
         float angleDeltaX = mouseDelta.y * rotationSpeed * Time.deltaTime;
         float angleX = Vector3.Angle(-Vector3.up, transform.forward);
         float newAngleX = angleX + angleDeltaX;
-        float clampedAngleX = Mathf.Clamp(newAngleX, minAngle, pivot == initialPivot ? maxAngle : maxAngleChucky);
+        float clampedAngleX = Mathf.Clamp(newAngleX, minAngle, pivot == initialPivot ? maxAngle : chuckyMaxAngle);
         float clampedAngleDeltaX = clampedAngleX - angleX;
         transform.RotateAround(pivot.position, -transform.right, clampedAngleDeltaX);
     }
@@ -123,11 +125,12 @@ public class CameraController : MonoBehaviour
         float scrollDelta = Mouse.current.scroll.ReadValue().y;
         if (scrollDelta != 0)
         {
-            Vector3 direction = (transform.position - pivot.position).normalized;
             float distance = Vector3.Distance(transform.position, pivot.position);
-            float newDistance = Mathf.Clamp(distance - scrollDelta * zoomSpeed * Time.deltaTime, minDistance, maxDistance);
+            float newDistance = Mathf.Clamp(distance - scrollDelta * zoomSpeed * Time.deltaTime, pivot == initialPivot ? minDistance : chuckyMinDistance, pivot == initialPivot ? maxDistance : chuckyMaxDistance);
+            float distanceDelta = newDistance - distance;
+            Vector3 direction = (transform.position - pivot.position).normalized;
 
-            transform.position = newDistance * direction;
+            transform.position += distanceDelta * direction;
         }
     }
 
@@ -138,7 +141,7 @@ public class CameraController : MonoBehaviour
         fromPosition = transform.position;
         fromRotation = transform.rotation;
         var forward = Vector3.ProjectOnPlane(newPivot.forward, Vector3.up).normalized;
-        toPosition = newPivot.position - chuckyDistance * forward + chuckyHeightOffset * Vector3.up;
+        toPosition = newPivot.position - chuckyInitialDistance * forward + chuckyInitialOffsetY * Vector3.up;
         toRotation = Quaternion.LookRotation((newPivot.position - toPosition).normalized, Vector3.up);
         t = 0;
     }
