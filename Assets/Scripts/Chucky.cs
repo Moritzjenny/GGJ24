@@ -4,11 +4,11 @@ using UnityEngine.InputSystem;
 
 public class Chucky : MonoBehaviour
 {
-    private new Rigidbody rigidbody;
+    private Rigidbody[] rigidbodies;
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbodies = GetComponentsInChildren<Rigidbody>();
     }
 
     private void Update()
@@ -20,7 +20,7 @@ public class Chucky : MonoBehaviour
         {
             Vector2 mousePosition = Mouse.current.position.ReadValue();
             Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject == gameObject)
+            if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject.transform.IsChildOf(transform))
             {
                 if (leftButtonClick)
                 {
@@ -28,7 +28,10 @@ public class Chucky : MonoBehaviour
                 }
                 else if (rightButtonClick)
                 {
-                    rigidbody.AddForce(1000 * CameraController.instance.transform.forward);
+                    foreach (var rigidbody in rigidbodies)
+                    {
+                        rigidbody.AddForce(1000 * CameraController.instance.transform.forward);
+                    }
                 }
             }
         }
