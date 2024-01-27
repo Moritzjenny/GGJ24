@@ -50,12 +50,10 @@ public class GameManager : MonoBehaviour
   private void FinishLevel()
   {
     var key = $"level{level}";
-    var currentHighscore = PlayerPrefs.GetInt(key);
-
-    if (!PlayerPrefs.HasKey(key) || bumps < currentHighscore)
+    if (!PlayerPrefs.HasKey(key) || bumps < PlayerPrefs.GetInt(key))
     {
       PlayerPrefs.SetInt(key, bumps);
-      HighscoreController.instance.Show(currentHighscore);
+      HighscoreController.instance.Show(bumps);
     }
     else
     {
