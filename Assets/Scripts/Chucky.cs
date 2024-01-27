@@ -30,10 +30,12 @@ public class Chucky : MonoBehaviour
                 print("click");
                 if (leftButtonClick)
                 {
-                    CameraController.instance.currentPivot = transform;
+                    CameraController.instance.SetPivot(transform);
                 }
                 else if (rightButtonClick)
                 {
+                    CameraController.instance.ResetPivot();
+
                     // Inform ChuckyController about kick, animation and gamelogic affected by the impulse is going to be handled there
                     chuckyController.KickChucky();
                     // Add force to main body to which pelvis is fixely joint schimauscha
