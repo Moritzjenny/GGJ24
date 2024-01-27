@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
   [HideInInspector] public Chucky[] chuckies;
   [HideInInspector] public int happyChuckies;
+  [HideInInspector] public int bumps;
 
   void Awake()
   {
@@ -30,5 +31,11 @@ public class GameManager : MonoBehaviour
   {
     happyChuckies += 1;
     Score.instance.UpdateScore();
+  }
+
+    public void IncrementBumps()
+  {
+    bumps += 1;
+    Bumps.instance.UpdateBumps();
   }
 }

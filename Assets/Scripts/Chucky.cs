@@ -75,6 +75,8 @@ public class Chucky : MonoBehaviour
         chuckyController.CheckForRecovery();
 
         StartCoroutine(InvokeAfterSeconds(CameraController.instance.resetDelay, Reset));
+
+        GameManager.instance.IncrementBumps();
     }
 
     IEnumerator InvokeAfterSeconds(float seconds, Action callback)
