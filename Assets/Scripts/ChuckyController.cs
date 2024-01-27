@@ -120,7 +120,7 @@ public class ChuckyController : MonoBehaviour
         if (chucky.happy)
         {
             emotionController.SetHappy();
-            // chucky.CheckContagion();
+            chucky.CheckContagion();
         }
     }
 }

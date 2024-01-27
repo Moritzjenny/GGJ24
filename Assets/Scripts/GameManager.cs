@@ -1,11 +1,10 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
   public static GameManager instance;
 
-  public int contagionDistance = 10;
+  public int contagionDistance = 0;
 
   [HideInInspector] public Chucky[] chuckies;
   [HideInInspector] public int happyChuckies;
