@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -49,5 +51,19 @@ public class Chucky : MonoBehaviour
         // Inform ChuckyController about kick, animation and gamelogic affected by the impulse is going to be handled there
         chuckyController.KickChucky();
         rigidbody.AddForce(force * CameraController.instance.transform.forward);
+
+        StartCoroutine(InvokeAfterSeconds(CameraController.instance.resetDelay, Reset));
+    }
+
+    IEnumerator InvokeAfterSeconds(float seconds, Action callback)
+    {
+        yield return new WaitForSeconds(seconds);
+        callback.Invoke();
+    }
+
+    private void Reset()
+    {
+        activeInstance = null;
+        CameraController.instance.ResetPivot();
     }
 }

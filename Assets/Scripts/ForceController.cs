@@ -10,7 +10,6 @@ public class ForceController : MonoBehaviour
 
     public float fillDuration = 1.5f;
     public int maxForce = 10000;
-    public float cameraResetDelay = 1f;
 
     private Image gradient;
 
@@ -35,7 +34,6 @@ public class ForceController : MonoBehaviour
 
         if (Keyboard.current.spaceKey.wasReleasedThisFrame || gradient.fillAmount == 1)
         {
-            CameraController.instance.ResetPivotAfterSeconds(cameraResetDelay);
             Chucky.activeInstance.Kick(gradient.fillAmount * maxForce);
             gradient.fillAmount = 0;
             gameObject.SetActive(false);

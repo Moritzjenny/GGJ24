@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
 
     public Transform pivot;
     public int animationSpeed = 2;
+    public float resetDelay = 1f;
 
     [Header("Rotation")]
     public int rotationSpeed = 360;
@@ -151,16 +152,5 @@ public class CameraController : MonoBehaviour
         toPosition = initialPosition;
         toRotation = initialRotation;
         t = 0;
-    }
-
-    public void ResetPivotAfterSeconds(float seconds)
-    {
-        StartCoroutine(InvokeAfterSeconds(seconds, ResetPivot));
-    }
-
-    IEnumerator InvokeAfterSeconds(float seconds, Action callback)
-    {
-        yield return new WaitForSeconds(seconds);
-        callback.Invoke();
     }
 }
