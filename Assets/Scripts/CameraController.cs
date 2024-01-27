@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
+    public Transform pivot;
+
     [Header("Rotation")]
     public int rotationSpeed = 360;
     public int minAngleX = 10;
@@ -40,14 +42,14 @@ public class CameraController : MonoBehaviour
         Vector2 mouseDelta = Mouse.current.delta.ReadValue();
 
         float angleDeltaZ = mouseDelta.x * rotationSpeed * Time.deltaTime;
-        transform.RotateAround(Vector3.zero, Vector3.up, angleDeltaZ);
+        transform.RotateAround(pivot.position, Vector3.up, angleDeltaZ);
 
         float angleDeltaX = mouseDelta.y * rotationSpeed * Time.deltaTime;
         float angleX = 90 - Vector3.Angle(transform.forward, -Vector3.up);
         float newAngleX = angleX + angleDeltaX;
         float clampedAngleX = Mathf.Clamp(newAngleX, minAngleX, maxAngleX);
         float clampedAngleDeltaX = clampedAngleX - angleX;
-        transform.RotateAround(Vector3.zero, transform.right, clampedAngleDeltaX);
+        transform.RotateAround(pivot.position, transform.right, clampedAngleDeltaX);
     }
 
     private void HideCursor()
@@ -67,8 +69,8 @@ public class CameraController : MonoBehaviour
         float scrollDelta = Mouse.current.scroll.ReadValue().y;
         if (scrollDelta != 0)
         {
-            Vector3 direction = (transform.position - Vector3.zero).normalized;
-            float distance = Vector3.Distance(transform.position, Vector3.zero);
+            Vector3 direction = (transform.position - pivot.position).normalized;
+            float distance = Vector3.Distance(transform.position, pivot.position);
             float newDistance = Mathf.Clamp(distance - scrollDelta * zoomSpeed * Time.deltaTime, minZoomDistance, maxZoomDistance);
 
             transform.position = newDistance * direction;
