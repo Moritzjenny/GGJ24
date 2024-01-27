@@ -27,6 +27,7 @@ public class Chucky : MonoBehaviour
         {
             GameManager.instance.IncrementHappyChuckies();
             emotionController.SetHappy();
+            CheckContagion();
         }
         else
         {
@@ -91,23 +92,41 @@ public class Chucky : MonoBehaviour
 
     public void SetHappy()
     {
+        if (happy)
+        {
+            // nothing to do if already happy
+            return;
+        };
+
         happy = true;
+        GameManager.instance.IncrementHappyChuckies();
         emotionController.SetHappy();
-        //CheckContagion();
+        CheckContagion();
     }
 
-    // public void CheckContagion()
-    // {
-    //     foreach (var otherChucky in GameManager.instance.chuckies)
-    //     {
-    //         if (otherChucky != this)
-    //         {
-    //             Vector3 direction = this.transform.position - otherChucky.transform.position;
-    //             if (Physics.Raycast(this.transform.position, direction, out RaycastHit hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Obstacle")) && hit.distance <= GameManager.instance.contagionDistance && (chucky.happy || otherChucky.happy))
-    //             {
+    public void CheckContagion()
+    {
+        foreach (var chucky in GameManager.instance.chuckies)
+        {
+            if (chucky == this)
+            {
+                // can't be contagious to itself
+                continue;
+            }
 
-    //             }
-    //         }
-    //     }
-    // }
+            Vector3 direction = transform.position - chucky.transform.position;
+            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Obstacle")))
+            {
+                // nothing to do if obstacle is hit
+                continue;
+            }
+
+            if (Vector3.Distance(transform.position, chucky.transform.position) <= GameManager.instance.contagionDistance && (happy || chucky.happy))
+            {
+                // set both happy if close enough
+                SetHappy();
+                chucky.SetHappy();
+            }
+        }
+    }
 }

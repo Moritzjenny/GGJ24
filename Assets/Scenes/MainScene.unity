@@ -809,8 +809,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ca33711e9d64e29b78698c05c3722b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contagionDistance: 3
+  chuckies: []
   happyChuckies: 0
-  totalChuckies: 0
 --- !u!4 &1798950463
 Transform:
   m_ObjectHideFlags: 0
