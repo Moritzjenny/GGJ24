@@ -6,14 +6,32 @@ using UnityEngine.InputSystem;
 public class Chucky : MonoBehaviour
 {
     public static Chucky activeInstance;
+    public bool happy;
 
     private new Rigidbody rigidbody;
     private ChuckyController chuckyController;
+    private EmotionController emotionController;
+
+
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
         chuckyController = GetComponent<ChuckyController>();
+        emotionController = GetComponent<EmotionController>();
+    }
+
+    private void Start()
+    {
+        if (happy)
+        {
+            GameManager.instance.IncreaseHappyChuckies();
+            emotionController.SetHappy();
+        }
+        else
+        {
+            emotionController.SetSad();
+        }
     }
 
     private void Update()
@@ -69,5 +87,11 @@ public class Chucky : MonoBehaviour
     {
         activeInstance = null;
         CameraController.instance.ResetPivot();
+    }
+
+    public void SetHappy()
+    {
+        happy = true;
+        emotionController.SetHappy();
     }
 }
