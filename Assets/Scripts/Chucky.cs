@@ -25,6 +25,9 @@ public class Chucky : MonoBehaviour
         {
             Vector2 mousePosition = Mouse.current.position.ReadValue();
             Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+
+            Debug.DrawRay(ray.origin, ray.direction * 10f, Color.blue, 2f); // Draw a debug ray
+
             if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject.transform.IsChildOf(transform))
             {
                 if (leftButtonClick)
@@ -51,6 +54,7 @@ public class Chucky : MonoBehaviour
         // Inform ChuckyController about kick, animation and gamelogic affected by the impulse is going to be handled there
         chuckyController.KickChucky();
         rigidbody.AddForce(force * CameraController.instance.transform.forward);
+        chuckyController.CheckForRecovery();
 
         StartCoroutine(InvokeAfterSeconds(CameraController.instance.resetDelay, Reset));
     }

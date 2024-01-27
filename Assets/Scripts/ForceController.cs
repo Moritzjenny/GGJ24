@@ -9,7 +9,7 @@ public class ForceController : MonoBehaviour
     public static ForceController instance;
 
     public float fillDuration = 1.5f;
-    public int maxForce = 10000;
+    public int maxForce = 10;
 
     private Image gradient;
 

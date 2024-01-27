@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections;
 
-
+    
 public class BlendShapeController : MonoBehaviour
 {
     public SkinnedMeshRenderer skinnedMeshRenderer;
     public string blendShapeName = "Key 1";
     public float frequency = 4.0f;
 
-    private void Start()
+    private void OnEnable()
     {
         if (skinnedMeshRenderer == null)
         {
