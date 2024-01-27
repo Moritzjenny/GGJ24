@@ -8,6 +8,9 @@ public class ChuckyController : MonoBehaviour
     private EmotionController emotionController;
     private Chucky chucky;
 
+    public GameObject redCircle;
+    public GameObject greenCircle;
+
     void Awake()
     {
         emotionController = GetComponent<EmotionController>();
@@ -75,6 +78,23 @@ public class ChuckyController : MonoBehaviour
         return false;
     }
 
+    public void ActivateRedCircle(){
+        redCircle.SetActive(true);
+    }
+
+    public void DeactivateRedCircle(){
+        redCircle.SetActive(false);
+    }
+
+    public void ActivateGreenCircle(){
+        greenCircle.SetActive(true);
+    }
+
+    public void DeactivateGreenCircle(){
+        greenCircle.SetActive(false);
+    }
+
+
 
     private IEnumerator GetUpCoroutine(float duration)
     {
@@ -121,6 +141,7 @@ public class ChuckyController : MonoBehaviour
         {
             emotionController.SetHappy();
             chucky.CheckContagion();
+            greenCircle.SetActive(true);
         }
     }
 }

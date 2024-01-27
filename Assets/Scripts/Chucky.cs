@@ -33,6 +33,7 @@ public class Chucky : MonoBehaviour
         {
             emotionController.SetSad();
         }
+        chuckyController.DeactivateRedCircle();
     }
 
     private void Update()
@@ -53,12 +54,14 @@ public class Chucky : MonoBehaviour
                 {
                     if (activeInstance == this)
                     {
+                        chuckyController.DeactivateRedCircle();
                         activeInstance = null;
                         CameraController.instance.ResetPivot();
                         ForceController.instance.gameObject.SetActive(false);
                     }
                     else
-                    {
+                    {                        
+                        chuckyController.ActivateRedCircle();
                         activeInstance = this;
                         CameraController.instance.SetPivot(transform);
                         ForceController.instance.gameObject.SetActive(true);
@@ -70,6 +73,8 @@ public class Chucky : MonoBehaviour
 
     public void Kick(float force)
     {
+        
+        chuckyController.DeactivateRedCircle();
         // Inform ChuckyController about kick, animation and gamelogic affected by the impulse is going to be handled there
         chuckyController.KickChucky();
         rigidbody.AddForce(force * CameraController.instance.transform.forward);
@@ -100,35 +105,49 @@ public class Chucky : MonoBehaviour
             return;
         };
 
-        happy = true;
+        
+        chuckyController.ActivateGreenCircle();
+        happy = true;        
         GameManager.instance.IncrementHappyChuckies();
         emotionController.SetHappy();
         CheckContagion();
     }
 
-    public void CheckContagion()
+  public void CheckContagion()
+{
+    foreach (var chucky in GameManager.instance.chuckies)
     {
-        foreach (var chucky in GameManager.instance.chuckies)
+        if (chucky == this)
         {
-            if (chucky == this)
-            {
-                // can't be contagious to itself
-                continue;
-            }
+            // can't be contagious to itself
+            continue;
+        }
 
-            Vector3 direction = transform.position - chucky.transform.position;
-            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Obstacle")))
-            {
-                // nothing to do if obstacle is hit
-                continue;
-            }
+        Vector3 direction = transform.position - chucky.transform.position;
+        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, Mathf.Infinity, 1 << LayerMask.NameToLayer("Obstacle")))
+        {
+            // nothing to do if obstacle is hit
+            continue;
+        }
 
-            if (Vector3.Distance(transform.position, chucky.transform.position) <= GameManager.instance.contagionDistance && (happy || chucky.happy))
-            {
-                // set both happy if close enough
-                SetHappy();
-                chucky.SetHappy();
-            }
+        if (Vector3.Distance(transform.position, chucky.transform.position) <= GameManager.instance.contagionDistance && (happy || chucky.happy))
+        {
+            // set both happy if close enough after a delay
+            Invoke("SetBothHappy", 1f);
         }
     }
+}
+
+private void SetBothHappy()
+{
+    SetHappy();
+    foreach (var chucky in GameManager.instance.chuckies)
+    {
+        if (chucky != this && Vector3.Distance(transform.position, chucky.transform.position) <= GameManager.instance.contagionDistance)
+        {
+            chucky.SetHappy();
+        }
+    }
+}
+
 }
