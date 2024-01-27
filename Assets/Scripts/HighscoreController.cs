@@ -7,6 +7,7 @@ public class HighscoreController : MonoBehaviour
     public static HighscoreController instance;
 
     public Text highscore;
+    public GameObject background;
 
     private void Awake()
     {
@@ -16,7 +17,7 @@ public class HighscoreController : MonoBehaviour
     public void Show(int bumps)
     {
         highscore.text = $"{bumps} bumps";
-        gameObject.SetActive(true);
+        background.SetActive(true);
     }
 
     public void Back()

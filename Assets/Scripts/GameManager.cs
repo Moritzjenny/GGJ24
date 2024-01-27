@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     if (happyChuckies == chuckies.Length)
     {
-      StartCoroutine(InvokeAfterSeconds(1, FinishLevel));
+      Invoke(nameof(FinishLevel), 1);
     }
   }
 
@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
   private void FinishLevel()
   {
     var key = $"level{level}";
+    print(PlayerPrefs.HasKey(key));
+    print(PlayerPrefs.GetInt(key));
     if (!PlayerPrefs.HasKey(key) || bumps < PlayerPrefs.GetInt(key))
     {
       PlayerPrefs.SetInt(key, bumps);
@@ -59,11 +61,5 @@ public class GameManager : MonoBehaviour
     {
       SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
     }
-  }
-
-  IEnumerator InvokeAfterSeconds(float seconds, Action callback)
-  {
-    yield return new WaitForSeconds(seconds);
-    callback.Invoke();
   }
 }
