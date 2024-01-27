@@ -5,11 +5,11 @@ public class CameraController : MonoBehaviour
 {
     [Header("Rotation")]
     public int rotationSpeed = 360;
-    public int minAngle = 10;
-    public int maxAngle = 90;
+    public int minAngleX = 10;
+    public int maxAngleX = 80;
 
     [Header("Zoom")]
-    public float zoomSpeed = 1f;
+    public int zoomSpeed = 10;
     public int minZoomDistance = 10;
     public int maxZoomDistance = 100;
 
@@ -39,12 +39,15 @@ public class CameraController : MonoBehaviour
     {
         Vector2 mouseDelta = Mouse.current.delta.ReadValue();
 
-        float rotationXAngle = mouseDelta.x * rotationSpeed * Time.deltaTime;
-        transform.RotateAround(Vector3.zero, Vector3.up, rotationXAngle);
+        float angleDeltaZ = mouseDelta.x * rotationSpeed * Time.deltaTime;
+        transform.RotateAround(Vector3.zero, Vector3.up, angleDeltaZ);
 
-        float rotationYAngle = mouseDelta.y * rotationSpeed * Time.deltaTime;
-        float newVerticalAngle = Mathf.Clamp(transform.eulerAngles.x - rotationYAngle, minAngle, maxAngle);
-        transform.rotation = Quaternion.Euler(newVerticalAngle, transform.eulerAngles.y, transform.eulerAngles.z);
+        float angleDeltaX = mouseDelta.y * rotationSpeed * Time.deltaTime;
+        float angleX = 90 - Vector3.Angle(transform.forward, -Vector3.up);
+        float newAngleX = angleX + angleDeltaX;
+        float clampedAngleX = Mathf.Clamp(newAngleX, minAngleX, maxAngleX);
+        float clampedAngleDeltaX = clampedAngleX - angleX;
+        transform.RotateAround(Vector3.zero, transform.right, clampedAngleDeltaX);
     }
 
     private void HideCursor()
