@@ -1,3 +1,5 @@
+using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +8,7 @@ public class CameraController : MonoBehaviour
     public static CameraController instance;
 
     public Transform pivot;
-    public Transform currentPivot;
+    public int animationSpeed = 2;
 
     [Header("Rotation")]
     public int rotationSpeed = 360;
@@ -19,7 +21,22 @@ public class CameraController : MonoBehaviour
     public int minDistance = 10;
     public int maxDistance = 100;
 
+    [Header("Chucky")]
+    public int chuckyDistance = 10;
+    public int chuckyHeightOffset = 2;
+
+    private Transform initialPivot;
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
+
     private Vector2 initialMousePosition;
+
+    private bool isAnimating;
+    private Vector3 fromPosition;
+    private Quaternion fromRotation;
+    private Vector3 toPosition;
+    private Quaternion toRotation;
+    private float t;
 
     private void Awake()
     {
@@ -28,11 +45,19 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        currentPivot = pivot;
+        initialPivot = pivot;
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
     }
 
     private void Update()
     {
+        if (isAnimating)
+        {
+            Animate();
+            return;
+        }
+
         if (Mouse.current.rightButton.isPressed)
         {
             Rotate();
@@ -51,19 +76,33 @@ public class CameraController : MonoBehaviour
         Zoom();
     }
 
+    private void Animate()
+    {
+        var newPosition = Vector3.Lerp(fromPosition, toPosition, t);
+        var newRotation = Quaternion.Lerp(fromRotation, toRotation, t);
+        transform.SetPositionAndRotation(newPosition, newRotation);
+
+        t += animationSpeed * Time.deltaTime;
+
+        if (t >= 1)
+        {
+            isAnimating = false;
+        }
+    }
+
     private void Rotate()
     {
         Vector2 mouseDelta = Mouse.current.delta.ReadValue();
 
         float angleDeltaZ = mouseDelta.x * rotationSpeed * Time.deltaTime;
-        transform.RotateAround(currentPivot.position, Vector3.up, angleDeltaZ);
+        transform.RotateAround(pivot.position, Vector3.up, angleDeltaZ);
 
         float angleDeltaX = -mouseDelta.y * rotationSpeed * Time.deltaTime;
         float angleX = Vector3.Angle(-Vector3.up, transform.forward);
         float newAngleX = angleX + angleDeltaX;
-        float clampedAngleX = Mathf.Clamp(newAngleX, minAngle, currentPivot == pivot ? maxAngle : maxAngleChucky);
+        float clampedAngleX = Mathf.Clamp(newAngleX, minAngle, pivot == initialPivot ? maxAngle : maxAngleChucky);
         float clampedAngleDeltaX = clampedAngleX - angleX;
-        transform.RotateAround(currentPivot.position, -transform.right, clampedAngleDeltaX);
+        transform.RotateAround(pivot.position, -transform.right, clampedAngleDeltaX);
     }
 
     private void HideCursor()
@@ -83,11 +122,34 @@ public class CameraController : MonoBehaviour
         float scrollDelta = Mouse.current.scroll.ReadValue().y;
         if (scrollDelta != 0)
         {
-            Vector3 direction = (transform.position - currentPivot.position).normalized;
-            float distance = Vector3.Distance(transform.position, currentPivot.position);
+            Vector3 direction = (transform.position - pivot.position).normalized;
+            float distance = Vector3.Distance(transform.position, pivot.position);
             float newDistance = Mathf.Clamp(distance - scrollDelta * zoomSpeed * Time.deltaTime, minDistance, maxDistance);
 
             transform.position = newDistance * direction;
         }
+    }
+
+    public void SetPivot(Transform newPivot)
+    {
+        pivot = newPivot;
+        isAnimating = true;
+        fromPosition = transform.position;
+        fromRotation = transform.rotation;
+        var forward = Vector3.ProjectOnPlane(newPivot.forward, Vector3.up).normalized;
+        toPosition = newPivot.position - chuckyDistance * forward + chuckyHeightOffset * Vector3.up;
+        toRotation = Quaternion.LookRotation((newPivot.position - toPosition).normalized, Vector3.up);
+        t = 0;
+    }
+
+    public void ResetPivot()
+    {
+        pivot = initialPivot;
+        isAnimating = true;
+        fromPosition = transform.position;
+        fromRotation = transform.rotation;
+        toPosition = initialPosition;
+        toRotation = initialRotation;
+        t = 0;
     }
 }

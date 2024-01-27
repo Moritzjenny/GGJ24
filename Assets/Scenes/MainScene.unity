@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivot: {fileID: 380467167}
-  currentPivot: {fileID: 0}
+  animationSpeed: 2
   rotationSpeed: 360
   minAngle: 10
   maxAngle: 80
@@ -237,6 +237,8 @@ MonoBehaviour:
   zoomSpeed: 10
   minDistance: 10
   maxDistance: 100
+  chuckyDistance: 5
+  chuckyHeightOffset: 2
 --- !u!1 &380467166
 GameObject:
   m_ObjectHideFlags: 0
