@@ -1087,38 +1087,6 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 0.1
       objectReference: {fileID: 0}
-    - target: {fileID: 694519461838677424, guid: f9da9b9b73dcacf44ac11aed8880b8e6, type: 3}
-      propertyPath: m_Mass
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3252476240139884345, guid: f9da9b9b73dcacf44ac11aed8880b8e6, type: 3}
-      propertyPath: m_Mass
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3884233770410699918, guid: f9da9b9b73dcacf44ac11aed8880b8e6, type: 3}
-      propertyPath: m_Mass
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5499261314371736087, guid: f9da9b9b73dcacf44ac11aed8880b8e6, type: 3}
-      propertyPath: m_Mass
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6010437052782989683, guid: f9da9b9b73dcacf44ac11aed8880b8e6, type: 3}
-      propertyPath: m_Mass
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7232325348043633173, guid: f9da9b9b73dcacf44ac11aed8880b8e6, type: 3}
-      propertyPath: m_Mass
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7623900198836920742, guid: f9da9b9b73dcacf44ac11aed8880b8e6, type: 3}
-      propertyPath: m_Mass
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7857912509548267758, guid: f9da9b9b73dcacf44ac11aed8880b8e6, type: 3}
-      propertyPath: m_Mass
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 8361121281547102281, guid: f9da9b9b73dcacf44ac11aed8880b8e6, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1163,17 +1131,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8735038200145567935, guid: f9da9b9b73dcacf44ac11aed8880b8e6, type: 3}
-      propertyPath: m_Mass
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 8908377380154462972, guid: f9da9b9b73dcacf44ac11aed8880b8e6, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9166631042250703495, guid: f9da9b9b73dcacf44ac11aed8880b8e6, type: 3}
-      propertyPath: m_Mass
-      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 9169275482004960970, guid: f9da9b9b73dcacf44ac11aed8880b8e6, type: 3}
       propertyPath: m_Name
