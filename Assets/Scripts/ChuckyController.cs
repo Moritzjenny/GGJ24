@@ -12,6 +12,9 @@ public class ChuckyController : MonoBehaviour
     public GameObject redCircle;
     public GameObject greenCircle;
 
+    private Vector3 originalPosition; // Store the original position before kick
+
+
     void Awake()
     {
         emotionController = GetComponent<EmotionController>();
@@ -32,6 +35,9 @@ public class ChuckyController : MonoBehaviour
 
     public void KickChucky()
     {
+        // Store the original position before kick
+        originalPosition = transform.position;
+
         // Disable the Animator component
         chuckyAnimator.enabled = false;
 
@@ -152,5 +158,16 @@ public class ChuckyController : MonoBehaviour
         }
 
         chucky.CheckContagion();
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Check if the collider is the "OutOfBounds" trigger collider
+        if (other.CompareTag("OutOfBounds"))
+        {
+            // Reset the Chucky's position to the original stored position before kick
+            transform.position = originalPosition;
+        }
     }
 }
