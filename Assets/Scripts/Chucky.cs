@@ -38,10 +38,7 @@ public class Chucky : MonoBehaviour
 
     private void Update()
     {
-        bool leftButtonClick = Mouse.current.leftButton.wasPressedThisFrame;
-        bool rightButtonClick = Mouse.current.rightButton.wasPressedThisFrame;
-
-        if (leftButtonClick || rightButtonClick)
+        if (activeInstance == null && Mouse.current.leftButton.wasPressedThisFrame)
         {
             Vector2 mousePosition = Mouse.current.position.ReadValue();
             Ray ray = Camera.main.ScreenPointToRay(mousePosition);
@@ -50,50 +47,30 @@ public class Chucky : MonoBehaviour
 
             if (Physics.Raycast(ray, out RaycastHit hit) && hit.collider.gameObject.transform.IsChildOf(transform))
             {
-                if (leftButtonClick)
-                {
-                    if (activeInstance == this)
-                    {
-                        chuckyController.DeactivateRedCircle();
-                        activeInstance = null;
-                        CameraController.instance.ResetPivot();
-                        ForceController.instance.gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        chuckyController.ActivateRedCircle();
-                        activeInstance = this;
-                        CameraController.instance.SetPivot(transform);
-                        ForceController.instance.gameObject.SetActive(true);
-                    }
-                }
+                chuckyController.ActivateRedCircle();
+                activeInstance = this;
+                CameraController.instance.SetPivot(transform);
+                ForceController.instance.gameObject.SetActive(true);
             }
         }
     }
 
     public void Kick(float force)
     {
-
+        activeInstance = null;
         chuckyController.DeactivateRedCircle();
         // Inform ChuckyController about kick, animation and gamelogic affected by the impulse is going to be handled there
         chuckyController.KickChucky();
         rigidbody.AddForce(force * CameraController.instance.transform.forward);
         chuckyController.CheckForRecovery();
-
-        StartCoroutine(InvokeAfterSeconds(CameraController.instance.resetDelay, Reset));
-
         GameManager.instance.IncrementBumps();
+
+        StartCoroutine(ResetCamera());
     }
 
-    IEnumerator InvokeAfterSeconds(float seconds, Action callback)
+    private IEnumerator ResetCamera()
     {
-        yield return new WaitForSeconds(seconds);
-        callback.Invoke();
-    }
-
-    private void Reset()
-    {
-        activeInstance = null;
+        yield return new WaitForSeconds(CameraController.instance.resetDelay);
         CameraController.instance.ResetPivot();
     }
 
