@@ -181,6 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pitchRange: 0.4
   changeStartPoint: 1
+  deactivateOnFinish: 0
 --- !u!1001 &1854781997578991014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1559,6 +1560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pitchRange: 0.3
   changeStartPoint: 0
+  deactivateOnFinish: 1
 --- !u!1 &3601895080134090144 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6941974259697555349, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
