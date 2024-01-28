@@ -31,7 +31,7 @@ public class ScoreScreenController : MonoBehaviour
 
     private string Pluralize(int bumps)
     {
-        return bumps == 1 ? "bump" : "pumps";
+        return bumps == 1 ? "bump" : "bumps";
     }
 
     public void Back()
