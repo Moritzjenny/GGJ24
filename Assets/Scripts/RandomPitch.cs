@@ -21,6 +21,12 @@ public class RandomPitch : MonoBehaviour
             // Set the random pitch to the AudioSource
             audioSource.pitch = randomPitch;
 
+            // Set the time to start playing at a random point within the audio clip
+            audioSource.time = Random.Range(0f, audioSource.clip.length);
+
+            // Loop the audio
+            audioSource.loop = true;
+
             // Play the audio
             audioSource.Play();
         }
