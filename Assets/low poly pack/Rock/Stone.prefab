@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33568657863684538}
   - component: {fileID: 23920439814379086}
   - component: {fileID: 2019007418142443570}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Mesh24
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 33097409462688234}
   - component: {fileID: 23212327361160348}
   - component: {fileID: 9043204766207324414}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Mesh22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 33568958087633454}
   - component: {fileID: 23132247541014346}
   - component: {fileID: 5836524740875887857}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Mesh23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
