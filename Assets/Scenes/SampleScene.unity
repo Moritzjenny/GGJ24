@@ -3483,11 +3483,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3191778138729249029, guid: 1b21218070ceb43fa82877e8c3cde095, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8763658
+      value: 0.86851746
       objectReference: {fileID: 0}
     - target: {fileID: 3191778138729249029, guid: 1b21218070ceb43fa82877e8c3cde095, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.48164612
+      value: 0.49565864
       objectReference: {fileID: 0}
     - target: {fileID: 3191778138729249029, guid: 1b21218070ceb43fa82877e8c3cde095, type: 3}
       propertyPath: m_LocalRotation.y
@@ -3512,14 +3512,6 @@ PrefabInstance:
     - target: {fileID: 7766974666391842100, guid: 1b21218070ceb43fa82877e8c3cde095, type: 3}
       propertyPath: m_Name
       value: Camera Pivot
-      objectReference: {fileID: 0}
-    - target: {fileID: 8800280996922440863, guid: 1b21218070ceb43fa82877e8c3cde095, type: 3}
-      propertyPath: chuckyInitialOffsetY
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8800280996922440863, guid: 1b21218070ceb43fa82877e8c3cde095, type: 3}
-      propertyPath: chuckyInitialDistance
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
