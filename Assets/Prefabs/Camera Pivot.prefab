@@ -115,7 +115,7 @@ MonoBehaviour:
   zoomSpeed: 10
   minDistance: 10
   maxDistance: 100
-  chuckyRotationSpeed: 270
+  chuckyRotationSpeed: 25
   chuckyMinAngle: 10
   chuckyMaxAngle: 170
   chuckyInitialDistance: 4
