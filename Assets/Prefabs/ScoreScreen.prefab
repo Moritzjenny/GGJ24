@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 5233369185581461661}
   - component: {fileID: 1774387845261649358}
   m_Layer: 5
-  m_Name: Highscore
+  m_Name: ScoreScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -506,5 +506,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ea4e9881027a435bb9a5c32e17c5333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  title: {fileID: 7536084160751169408}
   highscore: {fileID: 7464262541451335940}
   background: {fileID: 4334827398651011333}

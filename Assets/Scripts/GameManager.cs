@@ -55,11 +55,11 @@ public class GameManager : MonoBehaviour
     if (!PlayerPrefs.HasKey(key) || bumps < PlayerPrefs.GetInt(key))
     {
       PlayerPrefs.SetInt(key, bumps);
-      HighscoreController.instance.Show(bumps);
+      ScoreScreenController.instance.ShowHighScore(bumps);
     }
     else
     {
-      SceneManager.LoadScene("MainMenuScene", LoadSceneMode.Single);
+      ScoreScreenController.instance.ShowScore(bumps);
     }
   }
 }
