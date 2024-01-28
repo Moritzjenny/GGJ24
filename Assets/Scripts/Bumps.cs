@@ -15,6 +15,11 @@ public class Bumps : MonoBehaviour
 
   public void UpdateBumps()
   {
-    text.text = $"{GameManager.instance.bumps} Bumps";
+    text.text = $"{GameManager.instance.bumps} {Pluralize(GameManager.instance.bumps)}";
+  }
+
+  private string Pluralize(int bumps)
+  {
+    return bumps == 1 ? "bump" : "pumps";
   }
 }
