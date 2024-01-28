@@ -126,24 +126,23 @@ public class Chucky : MonoBehaviour
             var origin = transform.position + Vector3.up;
             var direction = (chucky.transform.position + Vector3.up - origin).normalized;
             var layerMask = LayerMask.GetMask("Obstacle", "Chucky");
+            Debug.DrawRay(origin, direction * GameManager.instance.contagionDistance, Color.red, 10f); // Draw a debug ray
             if (!Physics.Raycast(origin, direction, out RaycastHit hit, GameManager.instance.contagionDistance, layerMask))
             {
                 // nothing to do if nothing was hit
-                print("nothing hit");
                 continue;
             }
 
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
             {
                 // do nothing if obstacle was hit
-                print("obstacle hit");
                 continue;
             }
 
-            if (happy || chucky.happy)
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Chucky") && (happy || chucky.happy))
             {
+
                 // set both happy after a delay
-                print("contagion");
                 StartCoroutine(SetBothHappy(this, chucky));
             }
         }
