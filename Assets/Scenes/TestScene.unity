@@ -1117,7 +1117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ca33711e9d64e29b78698c05c3722b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
+  level: 0
   contagionDistance: 5
   chuckies: []
   happyChuckies: 0

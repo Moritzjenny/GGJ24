@@ -168,6 +168,7 @@ public class ChuckyController : MonoBehaviour
         {
             // Reset the Chucky's position to the original stored position before kick
             transform.position = originalPosition;
+            Recover();
         }
     }
 }
