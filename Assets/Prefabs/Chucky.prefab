@@ -776,6 +776,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3852658474951975021, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
+      propertyPath: targetScale
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3904338536207070788, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
       propertyPath: m_Name
       value: SoundEffects
@@ -892,6 +896,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6941974259697555349, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7007537568762177875, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -919,6 +927,18 @@ PrefabInstance:
     - target: {fileID: 7620909302966763594, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7718334559952948527, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7718334559952948527, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7718334559952948527, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7719127867046483445, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
       propertyPath: m_Layer
@@ -951,6 +971,10 @@ PrefabInstance:
     - target: {fileID: 8597698371886135454, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8597698371886135454, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
+      propertyPath: m_TagString
+      value: Chucky
       objectReference: {fileID: 0}
     - target: {fileID: 8692607577877473419, guid: 60ab07b23a75fbf458c80cba08df9edb, type: 3}
       propertyPath: m_Layer
@@ -1486,7 +1510,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.25370628, y: -0.01092319, z: 0.0016356995}
+  m_ConnectedAnchor: {x: 0.25370628, y: -0.010924069, z: 0.0016363086}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -1597,7 +1621,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.2537062, y: 0.010923296, z: -0.0016349284}
+  m_ConnectedAnchor: {x: -0.25370616, y: 0.010924175, z: -0.0016355366}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:
@@ -2030,7 +2054,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.022656845, y: -0.0018067826, z: -0.17085075}
+  m_ConnectedAnchor: {x: 0.022656845, y: -0.0018067826, z: -0.17085028}
   serializedVersion: 2
   m_SwingAxis: {x: -1, y: 0, z: 0}
   m_TwistLimitSpring:
