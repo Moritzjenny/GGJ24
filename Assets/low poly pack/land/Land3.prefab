@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4649719861055332}
   - component: {fileID: 33988571279196684}
   - component: {fileID: 23431604915111156}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mesh242
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4072497216163106}
+  - component: {fileID: 6578102967459271127}
   m_Layer: 0
   m_Name: Land3
   m_TagString: Untagged
@@ -116,3 +117,25 @@ Transform:
   - {fileID: 4649719861055332}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &6578102967459271127
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1314139979546494}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
