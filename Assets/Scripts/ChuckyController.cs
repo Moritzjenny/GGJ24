@@ -7,6 +7,7 @@ public class ChuckyController : MonoBehaviour
     private Rigidbody chuckyRigidbody; // Reference to the attached Rigidbody
     private EmotionController emotionController;
     private Chucky chucky;
+    public GameObject bumpSound;
 
     public GameObject redCircle;
     public GameObject greenCircle;
@@ -39,6 +40,9 @@ public class ChuckyController : MonoBehaviour
 
         // Set sad while flying
         emotionController.SetSad();
+
+        // Play the bumpsound
+        bumpSound.SetActive(true);
     }
 
     public void CheckForRecovery()

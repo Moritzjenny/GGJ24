@@ -1,9 +1,10 @@
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class RandomPitch : MonoBehaviour
+public class RandomPitchAndStart : MonoBehaviour
 {
     public float pitchRange = 0.1f; // The range of pitch variation
+    public bool changeStartPoint = true;
 
     void Start()
     {
@@ -22,7 +23,9 @@ public class RandomPitch : MonoBehaviour
             audioSource.pitch = randomPitch;
 
             // Set the time to start playing at a random point within the audio clip
-            audioSource.time = Random.Range(0f, audioSource.clip.length);
+            if (changeStartPoint) {
+                audioSource.time = Random.Range(0f, audioSource.clip.length);
+            }
 
             // Loop the audio
             audioSource.loop = true;
