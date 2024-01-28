@@ -326,7 +326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2643666648633641801, guid: 4dc7ee30f235b4e109c63fe688b2f531, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Level1Scene
+      value: Level1
       objectReference: {fileID: 0}
     - target: {fileID: 2833542909884630934, guid: 4dc7ee30f235b4e109c63fe688b2f531, type: 3}
       propertyPath: m_Pivot.x
@@ -577,7 +577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2643666648633641801, guid: 4dc7ee30f235b4e109c63fe688b2f531, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Level2Scene
+      value: Level2
       objectReference: {fileID: 0}
     - target: {fileID: 2833542909884630934, guid: 4dc7ee30f235b4e109c63fe688b2f531, type: 3}
       propertyPath: m_Pivot.x
@@ -699,7 +699,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2643666648633641801, guid: 4dc7ee30f235b4e109c63fe688b2f531, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Level5Scene
+      value: Level5
       objectReference: {fileID: 0}
     - target: {fileID: 2833542909884630934, guid: 4dc7ee30f235b4e109c63fe688b2f531, type: 3}
       propertyPath: m_Pivot.x
@@ -1266,7 +1266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2643666648633641801, guid: 4dc7ee30f235b4e109c63fe688b2f531, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Level3Scene
+      value: Level3
       objectReference: {fileID: 0}
     - target: {fileID: 2833542909884630934, guid: 4dc7ee30f235b4e109c63fe688b2f531, type: 3}
       propertyPath: m_Pivot.x
@@ -1511,7 +1511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2643666648633641801, guid: 4dc7ee30f235b4e109c63fe688b2f531, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Level4Scene
+      value: Level4
       objectReference: {fileID: 0}
     - target: {fileID: 2833542909884630934, guid: 4dc7ee30f235b4e109c63fe688b2f531, type: 3}
       propertyPath: m_Pivot.x
