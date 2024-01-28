@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,10 +10,10 @@ public class CameraController : MonoBehaviour
     public int animationSpeed = 2;
     public float resetDelay = 1f;
 
-    [Header("Rotation")]
-    public int rotationSpeed = 270;
-    public int minAngle = 10;
-    public int maxAngle = 80;
+    [Header("Pan")]
+    public int panSpeed = 25;
+    public int maxPanOffsetX = 15;
+    public int maxPanOffsetZ = 15;
 
     [Header("Zoom")]
     public int zoomSpeed = 8;
@@ -22,6 +21,8 @@ public class CameraController : MonoBehaviour
     public int maxDistance = 100;
 
     [Header("Chucky")]
+    public int chuckyRotationSpeed = 270;
+    public int chuckyMinAngle = 10;
     public int chuckyMaxAngle = 170;
     public int chuckyInitialDistance = 10;
     public int chuckyInitialOffsetY = 2;
@@ -61,22 +62,20 @@ public class CameraController : MonoBehaviour
             return;
         }
 
-        if (Mouse.current.rightButton.isPressed)
+        Zoom();
+
+        if (pivot == initialPivot)
         {
-            Rotate();
+            Pan();
+            return;
         }
+
+        Rotate();
 
         if (Mouse.current.rightButton.wasPressedThisFrame)
         {
-            HideCursor();
+            Cursor.lockState = CursorLockMode.Confined;
         }
-
-        if (Mouse.current.rightButton.wasReleasedThisFrame)
-        {
-            ShowCursor();
-        }
-
-        Zoom();
     }
 
     private void Animate()
@@ -93,17 +92,48 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    private void Pan()
+    {
+        var direction = Vector3.zero;
+
+        if (Keyboard.current.aKey.isPressed)
+        {
+            direction.x -= 1;
+        }
+        else if (Keyboard.current.dKey.isPressed)
+        {
+            direction.x += 1;
+        }
+
+        if (Keyboard.current.sKey.isPressed)
+        {
+            direction.z -= 1;
+        }
+        else if (Keyboard.current.wKey.isPressed)
+        {
+            direction.z += 1;
+        }
+
+        if (direction != Vector3.zero)
+        {
+            var delta = panSpeed * Time.deltaTime * direction.normalized;
+            var positionX = Math.Clamp(initialPivot.transform.position.x + delta.x, -maxPanOffsetX, maxPanOffsetX);
+            var positionZ = Math.Clamp(initialPivot.transform.position.z + delta.z, -maxPanOffsetZ, maxPanOffsetZ);
+            initialPivot.transform.position = new Vector3(positionX, initialPivot.transform.position.y, positionZ);
+        }
+    }
+
     private void Rotate()
     {
         Vector2 mouseDelta = Mouse.current.delta.ReadValue();
 
-        float angleDeltaZ = mouseDelta.x * rotationSpeed * Time.deltaTime;
+        float angleDeltaZ = mouseDelta.x * chuckyRotationSpeed * Time.deltaTime;
         transform.RotateAround(pivot.position, Vector3.up, angleDeltaZ);
 
-        float angleDeltaX = mouseDelta.y * rotationSpeed * Time.deltaTime;
+        float angleDeltaX = mouseDelta.y * chuckyRotationSpeed * Time.deltaTime;
         float angleX = Vector3.Angle(-Vector3.up, transform.forward);
         float newAngleX = angleX + angleDeltaX;
-        float clampedAngleX = Mathf.Clamp(newAngleX, minAngle, pivot == initialPivot ? maxAngle : chuckyMaxAngle);
+        float clampedAngleX = Mathf.Clamp(newAngleX, chuckyMinAngle, pivot == initialPivot ? chuckyMaxAngle : chuckyMaxAngle);
         float clampedAngleDeltaX = clampedAngleX - angleX;
         transform.RotateAround(pivot.position, -transform.right, clampedAngleDeltaX);
     }

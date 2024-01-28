@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class RestartParticleSystem : MonoBehaviour
 {
-    private ParticleSystem particleSystem;
+    private new ParticleSystem particleSystem;
 
     void Start()
     {

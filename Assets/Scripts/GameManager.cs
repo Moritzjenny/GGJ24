@@ -50,8 +50,6 @@ public class GameManager : MonoBehaviour
   private void FinishLevel()
   {
     var key = $"level{level}";
-    print(PlayerPrefs.HasKey(key));
-    print(PlayerPrefs.GetInt(key));
     if (!PlayerPrefs.HasKey(key) || bumps < PlayerPrefs.GetInt(key))
     {
       PlayerPrefs.SetInt(key, bumps);
