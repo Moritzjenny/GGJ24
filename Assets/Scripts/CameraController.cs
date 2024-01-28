@@ -174,6 +174,8 @@ public class CameraController : MonoBehaviour
         pivot = newPivot;
         isAnimating = true;
         HideCursor();
+        initialPosition = transform.position;
+        initialRotation = transform.rotation;
         fromPosition = transform.position;
         fromRotation = transform.rotation;
         var forward = Vector3.ProjectOnPlane(newPivot.forward, Vector3.up).normalized;
