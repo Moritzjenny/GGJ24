@@ -116,7 +116,7 @@ public class Chucky : MonoBehaviour
                 continue;
             }
 
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Chucky") && (happy || chucky.happy))
+            if (hit.collider.GetComponent<Chucky>() == chucky && (happy || chucky.happy))
             {
 
                 // set both happy after a delay
