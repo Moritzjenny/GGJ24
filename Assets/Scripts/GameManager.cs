@@ -59,5 +59,7 @@ public class GameManager : MonoBehaviour
     {
       ScoreScreenController.instance.ShowScore(bumps);
     }
+
+    CameraController.instance.ShowCursor();
   }
 }

@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
     public int chuckyMinAngle = 10;
     public int chuckyMaxAngle = 170;
     public int chuckyInitialDistance = 10;
-    public int chuckyInitialOffsetY = 2;
+    public int chuckyInitialOffsetY = 5;
     public int chuckyMinDistance = 1;
     public int chuckyMaxDistance = 20;
 
@@ -72,9 +72,12 @@ public class CameraController : MonoBehaviour
 
         Rotate();
 
-        if (Mouse.current.rightButton.wasPressedThisFrame)
+        if (Chucky.activeInstance != null && Mouse.current.rightButton.wasPressedThisFrame)
         {
-            Cursor.lockState = CursorLockMode.Confined;
+            Chucky.activeInstance.GetComponent<ChuckyController>().DeactivateRedCircle();
+            Chucky.activeInstance = null;
+            ResetPivot();
+            ForceController.instance.gameObject.SetActive(false);
         }
     }
 
@@ -138,16 +141,18 @@ public class CameraController : MonoBehaviour
         transform.RotateAround(pivot.position, -transform.right, clampedAngleDeltaX);
     }
 
-    private void HideCursor()
+    public void HideCursor()
     {
         initialMousePosition = Mouse.current.position.ReadValue();
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
-    private void ShowCursor()
+    public void ShowCursor()
     {
         Mouse.current.WarpCursorPosition(initialMousePosition);
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     private void Zoom()
@@ -168,6 +173,7 @@ public class CameraController : MonoBehaviour
     {
         pivot = newPivot;
         isAnimating = true;
+        HideCursor();
         fromPosition = transform.position;
         fromRotation = transform.rotation;
         var forward = Vector3.ProjectOnPlane(newPivot.forward, Vector3.up).normalized;
@@ -180,6 +186,7 @@ public class CameraController : MonoBehaviour
     {
         pivot = initialPivot;
         isAnimating = true;
+        ShowCursor();
         fromPosition = transform.position;
         fromRotation = transform.rotation;
         toPosition = initialPosition;
