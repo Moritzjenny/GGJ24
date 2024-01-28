@@ -110,12 +110,6 @@ public class Chucky : MonoBehaviour
                 continue;
             }
 
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
-            {
-                // do nothing if obstacle was hit
-                continue;
-            }
-
             if (hit.collider.GetComponent<Chucky>() == chucky && (happy || chucky.happy))
             {
 
